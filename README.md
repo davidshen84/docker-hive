@@ -9,8 +9,9 @@ docker build -t hive:latest .
 
 ## Run the container
 ```shell
-docker run --name hive --hostname hive --link hadoop \
--p 10000:10000 -p 10002:10002 -d hive:latest --initSchema derby
+docker run -d --name hive --hostname hive --link hadoop \
+  -p 10000:10000 -p 10002:10002 \
+  hive:latest --initSchema derby
 ```
 
 ## Connect to the Hive instance
