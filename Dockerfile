@@ -16,8 +16,11 @@ RUN mkdir /opt/hive && \
 COPY opt /opt
 COPY startup.sh /root/
 
-ENV HADOOP_HOME=/opt/hadoop
-EXPOSE 10000 10002
+ENV HADOOP_PREFIX=/opt/hadoop \
+    HIVE_HOME=/opt/hive \
+    HCATALOG_HOME=/opt/hive/hcatalog \
+    TEMPLETON_HOME=/opt/hive/hcatalog
+EXPOSE 10000 10002 50111
 WORKDIR /opt/hive
 
 ENTRYPOINT ["/root/startup.sh"]

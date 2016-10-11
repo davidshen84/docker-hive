@@ -22,4 +22,7 @@ while true; do
   esac
 done
 
+export PATH=$PATH:$HCATALOG_HOME/bin
+
+hcatalog/sbin/webhcat_server.sh start
 bin/hiveserver2
