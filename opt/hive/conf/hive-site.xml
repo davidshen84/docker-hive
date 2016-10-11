@@ -16,14 +16,9 @@
    -->
 <configuration>
   <property>
-    <name>hive.execution.engine</name>
-    <value>spark</value>
-    <description>
-      Expects one of [mr, tez, spark].
-      Chooses execution engine. Options are: mr (Map reduce, default), tez, spark. While MR
-      remains the default engine for historical reasons, it is itself a historical engine
-      and is deprecated in Hive 2 line. It may be removed without further warning.
-    </description>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>hdfs://hadoop:9000/user/hive/warehouse</value>
+    <description>location of default database for the warehouse</description>
   </property>
   <property>
     <name>hive.security.metastore.authorization.manager</name>
@@ -33,7 +28,6 @@
     org.apache.hadoop.hive.ql.security.authorization.HiveMetastoreAuthorizationProvider.
     </description>
   </property>
-
   <property>
     <name>hive.security.metastore.authenticator.manager</name>
     <value>org.apache.hadoop.hive.ql.security.HadoopDefaultMetastoreAuthenticator</value>
@@ -42,7 +36,6 @@
     org.apache.hadoop.hive.ql.security.HiveAuthenticationProvider.
     </description>
   </property>
-
   <property>
     <name>hive.metastore.pre.event.listeners</name>
     <value>org.apache.hadoop.hive.ql.security.authorization.AuthorizationPreEventListener</value>
