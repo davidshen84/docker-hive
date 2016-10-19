@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -m
+
 OPTS=`getopt -o h --long initSchema: -n "$0" -- "$@"`
 eval set -- "$OPTS"
 
@@ -24,5 +26,23 @@ done
 
 export PATH=$PATH:$HCATALOG_HOME/bin
 
-hcatalog/sbin/webhcat_server.sh start
-bin/hiveserver2
+start() {
+  hcatalog/sbin/webhcat_server.sh start
+  bin/hiveserver2 &
+}
+
+HIVESERVER_PID=
+stop() {
+  echo "Teardown container!!!"
+
+  kill -SIGTERM $HIVESERVER_PID
+  hcatalog/sbin/webhcat_server.sh stop
+
+  exit 0
+}
+
+start
+trap "stop" SIGTERM exit
+
+HIVESERVER_PID="$!"
+wait $HIVESERVER_PID

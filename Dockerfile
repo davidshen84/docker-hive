@@ -1,7 +1,7 @@
 FROM openjdk:8-jre
 MAINTAINER Xi Shen <davidshen84@gmail.com>
 
-LABEL hive=2.1.0 hadoop=2.7.3 jre=openjdk:8
+LABEL hive=2.1.0 hadoop=2.7.3 jre=openjdk-8-jre
 
 ADD http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz /opt
 RUN mkdir /opt/hadoop && \
@@ -13,8 +13,8 @@ RUN mkdir /opt/hive && \
     tar xzf /opt/apache-hive-2.1.0-bin.tar.gz --strip-components=1 -C /opt/hive && \
     rm /opt/apache-hive-2.1.0-bin.tar.gz
 
-COPY opt /opt
-COPY startup.sh /root/
+COPY opt/ /opt
+COPY root/ /root
 
 ENV HADOOP_PREFIX=/opt/hadoop \
     HIVE_HOME=/opt/hive \
